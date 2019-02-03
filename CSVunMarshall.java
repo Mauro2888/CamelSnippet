@@ -7,7 +7,12 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 import java.math.BigDecimal;
 
 
-/** route
+/** route andcsv example
+
+String CSV = "type,sku#,itemdescription,price
+ADD,100,Samsung TV,500
+ADD,101,LG TV,500";
+
 DataFormat bindy = new BindyCsvDataFormat(Item.class);
 from("{{startRoute}}")
                 .log("Timer Invoked and the body" + environment.getProperty("message"))
