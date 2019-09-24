@@ -1,28 +1,22 @@
 package main;
 
-
-import com.microsoft.azure.servicebus.QueueClient;
-import com.microsoft.azure.servicebus.ReceiveMode;
-import com.microsoft.azure.servicebus.TopicClient;
-import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
-import com.microsoft.azure.servicebus.primitives.ServiceBusException;
 import com.microsoft.windowsazure.Configuration;
 import com.microsoft.windowsazure.exception.ServiceException;
 import com.microsoft.windowsazure.services.servicebus.ServiceBusConfiguration;
 
 import com.microsoft.windowsazure.services.servicebus.ServiceBusContract;
 import com.microsoft.windowsazure.services.servicebus.ServiceBusService;
-import com.microsoft.windowsazure.services.servicebus.implementation.QueueDescription;
-import com.microsoft.windowsazure.services.servicebus.implementation.TopicDescription;
 import com.microsoft.windowsazure.services.servicebus.models.*;
-import com.sun.xml.bind.v2.TODO;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.util.*;
+
+/**
+<!-- ASB Frameworks-->
+	<dependency>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-servicebus</artifactId>
+        <version>0.9.7</version>
+        </dependency>
+*/
 
 public class Main {
 
@@ -31,13 +25,13 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		//System.out.println(messageCount("queueTest"));
-		getQueues(connectionToAsb()).forEach(item->System.out.println(item));
 		getQueues(connectionToAsb()).forEach(item -> System.out.println(item));
 
 	}
 
 	/**
 	 * This method retrive all the queues from ASB
+	 *
 	 * @param serviceBusContract Service manager connection
 	 * @return list of queues
 	 */
@@ -45,7 +39,7 @@ public class Main {
 		int size = 0;
 		List<String> exisingQueues = new ArrayList<>();
 		try {
-			while (exisingQueues.size() == size){
+			while (exisingQueues.size() == size) {
 				ListQueuesOptions listQueuesOptions = new ListQueuesOptions().setSkip(size);
 				ListQueuesResult queueList2 = serviceBusContract.listQueues(listQueuesOptions);
 				for (QueueInfo queueInfo : queueList2.getItems()) {
@@ -84,6 +78,7 @@ public class Main {
 
 	/**
 	 * This method retrive all topics from ASB
+	 *
 	 * @param serviceBusContract connector
 	 * @throws ServiceException topic Path
 	 */
@@ -92,7 +87,4 @@ public class Main {
 			System.out.println(i.getPath());
 		}
 	}
-
 }
-
-
